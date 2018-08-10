@@ -1,7 +1,7 @@
-CREATE TABLE `Biblioteca`.`autor` ( 
+CREATE TABLE `Biblioteca`.`editora` ( 
 	`id` INT NOT NULL , 
 	`codigo` VARCHAR(255) NOT NULL , 
 	`nome` VARCHAR(255) NOT NULL , 
-	`sobrenome` VARCHAR(255) NOT NULL , 
+	`nacional` BOOLEAN NOT NULL , 
 	PRIMARY KEY (`id`)
 ) ENGINE = InnoDB;
