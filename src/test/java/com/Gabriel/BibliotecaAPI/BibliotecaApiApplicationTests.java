@@ -11,7 +11,7 @@ public class BibliotecaApiApplicationTests {
 
 	@Test
 	public void contextLoads() {
-		System.out.println("Teste OK");
+		System.out.println("Teste OK  ");
 	}
 
 }
