@@ -1,19 +1,7 @@
-package com.Gabriel.Biblioteca.api.entities;
+package com.Gabriel.Biblioteca.api.dtos;
 
-import java.io.Serializable;
+public class MaterialDTO {
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-public class Material implements Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 6301642572595971580L;
-	
 	private int id;
 	private String codigo;
 	private int tipo = 0;
@@ -27,12 +15,10 @@ public class Material implements Serializable {
 	private int quantidade;
 	private int quantidadeEmprestimo;
 
-	public Material() {
+	public MaterialDTO() {
 		// TODO Auto-generated constructor stub
 	}
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	public int getId() {
 		return id;
 	}
@@ -41,7 +27,6 @@ public class Material implements Serializable {
 		this.id = id;
 	}
 
-	@Column
 	public String getCodigo() {
 		return codigo;
 	}
@@ -50,7 +35,6 @@ public class Material implements Serializable {
 		this.codigo = codigo;
 	}
 
-	@Column
 	public int getTipo() {
 		return tipo;
 	}
@@ -59,7 +43,6 @@ public class Material implements Serializable {
 		this.tipo = tipo;
 	}
 
-	@Column
 	public String getNome() {
 		return nome;
 	}
@@ -68,7 +51,6 @@ public class Material implements Serializable {
 		this.nome = nome;
 	}
 
-	@Column
 	public String getDescricao() {
 		return descricao;
 	}
@@ -77,7 +59,6 @@ public class Material implements Serializable {
 		this.descricao = descricao;
 	}
 
-	@Column
 	public String getMaterial() {
 		return material;
 	}
@@ -86,7 +67,6 @@ public class Material implements Serializable {
 		this.material = material;
 	}
 
-	@Column
 	public String getEstante() {
 		return estante;
 	}
@@ -95,7 +75,6 @@ public class Material implements Serializable {
 		this.estante = estante;
 	}
 
-	@Column
 	public int getQuantidade() {
 		return quantidade;
 	}
@@ -104,7 +83,6 @@ public class Material implements Serializable {
 		this.quantidade = quantidade;
 	}
 
-	@Column
 	public int getQuantidadeEmprestimo() {
 		return quantidadeEmprestimo;
 	}
@@ -115,7 +93,7 @@ public class Material implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Material [id=" + id + ", codigo=" + codigo + ", tipo=" + tipo + ", nome=" + nome + ", descricao="
+		return "MaterialDTO [id=" + id + ", codigo=" + codigo + ", tipo=" + tipo + ", nome=" + nome + ", descricao="
 				+ descricao + ", material=" + material + ", estante=" + estante + ", quantidade=" + quantidade
 				+ ", quantidadeEmprestimo=" + quantidadeEmprestimo + "]";
 	}
