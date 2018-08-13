@@ -3,17 +3,21 @@ package com.Gabriel.Biblioteca.api.entities;
 import java.io.Serializable;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "material")
 public class Material implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 6301642572595971580L;
-	
+
 	private int id;
 	private String codigo;
 	private int tipo = 0;

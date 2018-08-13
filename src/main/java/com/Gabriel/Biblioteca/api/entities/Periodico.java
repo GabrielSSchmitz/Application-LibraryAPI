@@ -2,6 +2,15 @@ package com.Gabriel.Biblioteca.api.entities;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "periodico")
 public class Periodico implements Serializable {
 
 	/**
@@ -12,9 +21,6 @@ public class Periodico implements Serializable {
 	private String codigo;
 	private int tipo = 0;
 	private String nome = "";
-
-//	----------------------------
-
 	private int id;
 	private int volume;
 	private int quantidade;
@@ -24,6 +30,7 @@ public class Periodico implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
+	@Column
 	public String getCodigo() {
 		return codigo;
 	}
@@ -32,6 +39,7 @@ public class Periodico implements Serializable {
 		this.codigo = codigo;
 	}
 
+	@Column
 	public int getTipo() {
 		return tipo;
 	}
@@ -40,6 +48,7 @@ public class Periodico implements Serializable {
 		this.tipo = tipo;
 	}
 
+	@Column
 	public String getNome() {
 		return nome;
 	}
@@ -47,7 +56,9 @@ public class Periodico implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	public int getId() {
 		return id;
 	}
@@ -56,6 +67,7 @@ public class Periodico implements Serializable {
 		this.id = id;
 	}
 
+	@Column
 	public int getVolume() {
 		return volume;
 	}
@@ -64,6 +76,7 @@ public class Periodico implements Serializable {
 		this.volume = volume;
 	}
 
+	@Column
 	public int getQuantidade() {
 		return quantidade;
 	}
@@ -72,6 +85,7 @@ public class Periodico implements Serializable {
 		this.quantidade = quantidade;
 	}
 
+	@Column
 	public int getQuantidadeEmprestimo() {
 		return quantidadeEmprestimo;
 	}

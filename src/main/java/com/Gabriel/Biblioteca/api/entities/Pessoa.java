@@ -1,5 +1,14 @@
 package com.Gabriel.Biblioteca.api.entities;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "periodico")
 public class Pessoa {
 
 	private int id;
@@ -11,6 +20,8 @@ public class Pessoa {
 		// TODO Auto-generated constructor stub
 	}
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	public int getId() {
 		return id;
 	}
@@ -19,6 +30,7 @@ public class Pessoa {
 		this.id = id;
 	}
 
+	@Column
 	public String getNome() {
 		return nome;
 	}
@@ -27,6 +39,7 @@ public class Pessoa {
 		this.nome = nome;
 	}
 
+	@Column
 	public String getTelefone() {
 		return telefone;
 	}
@@ -35,6 +48,7 @@ public class Pessoa {
 		this.telefone = telefone;
 	}
 
+	@Column
 	public String getCpf() {
 		return cpf;
 	}

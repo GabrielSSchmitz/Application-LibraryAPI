@@ -4,10 +4,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "livro")
 public class Livro implements Serializable {
 
 	/**
@@ -19,9 +23,6 @@ public class Livro implements Serializable {
 	private String codigo;
 	private int tipo = 0;
 	private String nome = "";
-
-//	----------------------------
-
 	private String data;
 	private int edicao;
 	private int volume;
