@@ -1,9 +1,11 @@
 package com.Gabriel.Biblioteca.api.dtos;
 
+import javax.validation.constraints.NotEmpty;
+
 public class AutorDTO {
 
 	private int id;
-	private int codigo;
+	private String codigo;
 	private String nome;
 	private String sobrenome;
 
@@ -11,14 +13,16 @@ public class AutorDTO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public int getCodigo() {
+	@NotEmpty(message= "Código não deve ser vazio")
+	public String getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(int codigo) {
+	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
 
+	@NotEmpty(message= "Nome não deve ser vazio")
 	public String getNome() {
 		return nome;
 	}
@@ -27,6 +31,7 @@ public class AutorDTO {
 		this.nome = nome;
 	}
 
+	@NotEmpty(message= "Sobrenome não deve ser vazio")
 	public String getSobrenome() {
 		return sobrenome;
 	}

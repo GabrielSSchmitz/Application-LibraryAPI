@@ -1,11 +1,13 @@
 package com.Gabriel.Biblioteca.api.services;
 
-import org.springframework.stereotype.Service;
+import java.util.Optional;
 
-@Service
-public class AutorService {
+import com.Gabriel.Biblioteca.api.entities.Autor;
 
-	public void testeServico() {
-		System.out.println("Teste serviço autor [OK]");
-	}
+public interface AutorService {
+
+	public Optional<Autor> buscaAutorPorCodigo(String codigo);
+
+	public Autor persistir(Autor autor);
+
 }

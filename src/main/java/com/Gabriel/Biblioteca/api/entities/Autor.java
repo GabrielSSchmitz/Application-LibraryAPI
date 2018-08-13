@@ -10,7 +10,7 @@ public class Autor implements Serializable {
 	private static final long serialVersionUID = 8458069119263096764L;
 
 	private int id;
-	private int codigo;
+	private String codigo;
 	private String nome;
 	private String sobrenome;
 
@@ -29,11 +29,11 @@ public class Autor implements Serializable {
 	}
 
 	@Column
-	public int getCodigo() {
+	public String getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(int codigo) {
+	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
 
