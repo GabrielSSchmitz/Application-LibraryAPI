@@ -1,5 +1,5 @@
 CREATE TABLE `Biblioteca`.`material` (
-	`id` INT NOT NULL ,
+	`id` INT NOT NULL AUTO_INCREMENT ,
 	`codifo` VARCHAR(255) NOT NULL , 
 	`tipo` INT NOT NULL , 
 	`nome` VARCHAR(255) NOT NULL , 

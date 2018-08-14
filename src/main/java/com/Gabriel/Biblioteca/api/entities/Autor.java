@@ -15,7 +15,7 @@ public class Autor implements Serializable {
 	private String sobrenome;
 
 	public Autor() {
-		// TODO Auto-generated constructor stub
+		// TODO Auto-generated constructor stubautorb 
 	}
 
 	@Id
@@ -28,7 +28,7 @@ public class Autor implements Serializable {
 		this.id = id;
 	}
 
-	@Column
+	@Column(name="codigo")
 	public String getCodigo() {
 		return codigo;
 	}
@@ -37,7 +37,7 @@ public class Autor implements Serializable {
 		this.codigo = codigo;
 	}
 
-	@Column
+	@Column(name="nome")
 	public String getNome() {
 		return nome;
 	}
@@ -46,7 +46,7 @@ public class Autor implements Serializable {
 		this.nome = nome;
 	}
 	
-	@Column
+	@Column(name="sobrenome")
 	public String getSobrenome() {
 		return sobrenome;
 	}
