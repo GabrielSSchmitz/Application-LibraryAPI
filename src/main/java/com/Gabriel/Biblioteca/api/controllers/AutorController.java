@@ -29,8 +29,6 @@ public class AutorController {
 
 	private static final Logger log = LoggerFactory.getLogger(AutorController.class);
 
-	private static final Object Autor = null;
-
 	@Autowired
 	private AutorService autorService;
 
