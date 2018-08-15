@@ -1,5 +1,7 @@
 package com.Gabriel.Biblioteca.api.dtos;
 
+import javax.validation.constraints.NotEmpty;
+
 public class EditoraDTO {
 
 	private int id;
@@ -19,6 +21,7 @@ public class EditoraDTO {
 		this.id = id;
 	}
 
+	@NotEmpty(message = "Código não deve ser vazio")
 	public String getCodigo() {
 		return codigo;
 	}
@@ -27,6 +30,7 @@ public class EditoraDTO {
 		this.codigo = codigo;
 	}
 
+	@NotEmpty(message = "Nome não deve ser vazio")
 	public String getNome() {
 		return nome;
 	}
@@ -35,6 +39,7 @@ public class EditoraDTO {
 		this.nome = nome;
 	}
 
+	@NotEmpty(message = "Nacional não deve ser vazio")
 	public boolean isNacional() {
 		return nacional;
 	}

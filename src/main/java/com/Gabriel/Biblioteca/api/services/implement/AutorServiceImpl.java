@@ -1,16 +1,17 @@
 package com.Gabriel.Biblioteca.api.services.implement;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import com.Gabriel.Biblioteca.api.entities.Autor;
 import com.Gabriel.Biblioteca.api.repositories.AutorRepository;
 import com.Gabriel.Biblioteca.api.services.AutorService;
-
 @Service
 public class AutorServiceImpl implements AutorService {
 
@@ -30,5 +31,13 @@ public class AutorServiceImpl implements AutorService {
 		log.info("Cadastrando autor: {}", autor);
 		return this.autorRepository.save(autor);
 	}
+
+	@Override
+	public List<Autor> findAll() {
+		return  autorRepository.findAll();
+	}
+
+
+
 
 }

@@ -1,13 +1,18 @@
 package com.Gabriel.Biblioteca.api.services;
 
+import java.util.List;
 import java.util.Optional;
+
+import org.springframework.data.domain.Page;
 
 import com.Gabriel.Biblioteca.api.entities.Autor;
 
 public interface AutorService {
 
-	public Optional<Autor> findByCodigo(String codigo);
+	Optional<Autor> findByCodigo(String codigo);
 
-	public Autor persistir(Autor autor);
+	Autor persistir(Autor autor);
+	
+	List<Autor> findAll();
 
 }

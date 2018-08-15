@@ -1,6 +1,8 @@
 package com.Gabriel.Biblioteca.api.controllers;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -32,8 +34,15 @@ public class AutorController {
 	@Autowired
 	private AutorService autorService;
 
-	public AutorController() {
-		// TODO Auto-generated constructor stub
+	@GetMapping
+	public ResponseEntity<Response<AutorDTO>> listaAutores() {
+		Response<AutorDTO> response = new Response<AutorDTO>();
+
+		List<Autor> autor = autorService.findAll();
+		response.setData();
+		;
+
+		return ResponseEntity.ok(response);
 	}
 
 	/**
@@ -134,6 +143,14 @@ public class AutorController {
 	private void validaSeAutorExiste(AutorDTO autorDTO, BindingResult result) {
 		this.autorService.findByCodigo(autorDTO.getCodigo())
 				.ifPresent(aut -> result.addError(new ObjectError("autor", autorDTO.getNome() + " já existe")));
+
+	}
+
+	private List<AutorDTO> converteListaParaListaDTO(List<Autor> autors) {
+		List<AutorDTO> autorDTO = new ArrayList<>();
+
+		autors.forEach(autor -> autorDTO.add(converteAutorParaDTO(autor)));
+		return autorDTO;
 
 	}
 }
