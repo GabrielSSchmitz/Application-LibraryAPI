@@ -39,10 +39,15 @@ public class AutorController {
 		Response<AutorDTO> response = new Response<AutorDTO>();
 
 		List<Autor> autor = autorService.findAll();
-		response.setData();
-		;
+//		response.setData(converteListaParaListaDTO(autor));
+		
+	    T[] arr = autor.size();
 
-		return ResponseEntity.ok(response);
+	    for (int i = 0; i < autor.size(); ++i) {
+	        arr[i] = autor.get(i);
+	    }
+	    
+		return ResponseEntity.ok();
 	}
 
 	/**
