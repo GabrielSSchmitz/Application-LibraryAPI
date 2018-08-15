@@ -2,13 +2,9 @@ package com.Gabriel.Biblioteca.api.services.implement;
 
 import java.util.Optional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import com.Gabriel.Biblioteca.api.entities.Autor;
@@ -26,8 +22,7 @@ public class AutorServiceImpl implements AutorService {
 	@Override
 	public Optional<Autor> buscaAutorPorCodigo(String codigo) {
 		log.info("Buscando Autor pelo codigo {}", codigo);
-//		return Optional.ofNullable(autorRepository.procuraPorCodigo(codigo));
-		return null;
+		return Optional.ofNullable(autorRepository.findByCodigo(codigo));
 	}
 
 	@Override

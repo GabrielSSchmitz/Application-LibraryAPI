@@ -41,6 +41,7 @@ public class AutorController {
 	 * @param codigo
 	 * @return
 	 */
+	
 	@GetMapping(value = "/{codigo}")
 	public String consulta(@PathVariable("codigo") String codigo) {
 		return "Código apresentado: " + codigo;
