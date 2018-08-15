@@ -13,7 +13,7 @@ public class AutorDTO {
 		// TODO Auto-generated constructor stub
 	}
 
-	@NotEmpty(message= "Código não deve ser vazio")
+	@NotEmpty(message = "Código não deve ser vazio")
 	public String getCodigo() {
 		return codigo;
 	}
@@ -22,7 +22,7 @@ public class AutorDTO {
 		this.codigo = codigo;
 	}
 
-	@NotEmpty(message= "Nome não deve ser vazio")
+	@NotEmpty(message = "Nome não deve ser vazio")
 	public String getNome() {
 		return nome;
 	}
@@ -31,7 +31,7 @@ public class AutorDTO {
 		this.nome = nome;
 	}
 
-	@NotEmpty(message= "Sobrenome não deve ser vazio")
+	@NotEmpty(message = "Sobrenome não deve ser vazio")
 	public String getSobrenome() {
 		return sobrenome;
 	}

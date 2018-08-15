@@ -20,7 +20,7 @@ public class AutorServiceImpl implements AutorService {
 	private AutorRepository autorRepository;
 
 	@Override
-	public Optional<Autor> buscaAutorPorCodigo(String codigo) {
+	public Optional<Autor> findByCodigo(String codigo) {
 		log.info("Buscando Autor pelo codigo {}", codigo);
 		return Optional.ofNullable(autorRepository.findByCodigo(codigo));
 	}

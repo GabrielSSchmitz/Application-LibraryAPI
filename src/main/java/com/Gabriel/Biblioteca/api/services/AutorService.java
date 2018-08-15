@@ -6,7 +6,7 @@ import com.Gabriel.Biblioteca.api.entities.Autor;
 
 public interface AutorService {
 
-	public Optional<Autor> buscaAutorPorCodigo(String codigo);
+	public Optional<Autor> findByCodigo(String codigo);
 
 	public Autor persistir(Autor autor);
 
