@@ -39,7 +39,6 @@ public class EditoraDTO {
 		this.nome = nome;
 	}
 
-	@NotEmpty(message = "Nacional não deve ser vazio")
 	public boolean isNacional() {
 		return nacional;
 	}

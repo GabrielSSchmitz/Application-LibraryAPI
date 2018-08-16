@@ -6,9 +6,19 @@ import com.Gabriel.Biblioteca.api.entities.Editora;
 
 public interface EditoraService {
 
-
-
+	/**
+	 * Procura editora pelo código
+	 * 
+	 * @param codigo
+	 * @return Optional<Editora>
+	 */
 	public Optional<Editora> findByCodigo(String codigo);
-	
-	public Editora persistir (Editora editora);
+
+	/**
+	 * Salva a editora na base de dados
+	 * 
+	 * @param editora
+	 * @return Editora
+	 */
+	public Editora persistir(Editora editora);
 }

@@ -77,7 +77,7 @@ public class AutorController {
 	 * 
 	 * @param autorDTO
 	 * @param result
-	 * @return Autor ResponseEntity.ok
+	 * @return Autor  
 	 * @throws NoSuchAlgorithmException
 	 */
 	@PostMapping
@@ -85,7 +85,7 @@ public class AutorController {
 			throws NoSuchAlgorithmException {
 		log.info("Cadastrando autor {}", autorDTO.toString());
 
-		Response<AutorDTO> response = new Response<AutorDTO>();
+		Response<AutorDTO> response = new Response<>();
 		validaSeAutorExiste(autorDTO, result);
 		Autor autor = this.converteDTOParaAutor(autorDTO);
 
@@ -143,12 +143,12 @@ public class AutorController {
 				.ifPresent(aut -> result.addError(new ObjectError("autor", autorDTO.getNome() + " já existe")));
 
 	}
-
-	private List<AutorDTO> converteListaParaListaDTO(List<Autor> autors) {
-		List<AutorDTO> autorDTO = new ArrayList<>();
-
-		autors.forEach(autor -> autorDTO.add(converteAutorParaDTO(autor)));
-		return autorDTO;
-
-	}
+//
+//	private List<AutorDTO> converteListaParaListaDTO(List<Autor> autors) {
+//		List<AutorDTO> autorDTO = new ArrayList<>();
+//
+//		autors.forEach(autor -> autorDTO.add(converteAutorParaDTO(autor)));
+//		return autorDTO;
+//
+//	}
 }
