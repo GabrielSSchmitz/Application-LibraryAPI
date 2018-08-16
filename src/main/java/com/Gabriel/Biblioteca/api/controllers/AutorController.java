@@ -34,21 +34,14 @@ public class AutorController {
 	@Autowired
 	private AutorService autorService;
 
-	@GetMapping
-	public ResponseEntity<Response<AutorDTO>> listaAutores() {
-		Response<AutorDTO> response = new Response<AutorDTO>();
-
-		List<Autor> autor = autorService.findAll();
-//		response.setData(converteListaParaListaDTO(autor));
-		
-	    T[] arr = autor.size();
-
-	    for (int i = 0; i < autor.size(); ++i) {
-	        arr[i] = autor.get(i);
-	    }
-	    
-		return ResponseEntity.ok();
-	}
+//	@GetMapping
+//	public ResponseEntity<Response<AutorDTO>> listaAutores() {
+//		Response<AutorDTO> response = new Response<AutorDTO>();
+//
+//		response.setData(autorService.findAll());
+//		
+//		return ResponseEntity.ok(response);
+//	}
 
 	/**
 	 * 
