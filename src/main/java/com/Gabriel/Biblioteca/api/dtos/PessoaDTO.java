@@ -1,5 +1,9 @@
 package com.Gabriel.Biblioteca.api.dtos;
 
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.br.CPF;
+
 public class PessoaDTO {
 
 	private int id;
@@ -19,6 +23,7 @@ public class PessoaDTO {
 		this.id = id;
 	}
 
+	@NotEmpty(message = "Nome não pode ser vazio")
 	public String getNome() {
 		return nome;
 	}
@@ -35,6 +40,8 @@ public class PessoaDTO {
 		this.telefone = telefone;
 	}
 
+	@NotEmpty(message = "CPF pode ser vazio")
+	@CPF(message = "CPF Invalido")
 	public String getCpf() {
 		return cpf;
 	}

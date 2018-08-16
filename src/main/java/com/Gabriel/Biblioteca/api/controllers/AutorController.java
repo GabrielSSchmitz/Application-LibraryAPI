@@ -1,8 +1,6 @@
 package com.Gabriel.Biblioteca.api.controllers;
 
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -77,7 +75,7 @@ public class AutorController {
 	 * 
 	 * @param autorDTO
 	 * @param result
-	 * @return Autor  
+	 * @return Autor
 	 * @throws NoSuchAlgorithmException
 	 */
 	@PostMapping

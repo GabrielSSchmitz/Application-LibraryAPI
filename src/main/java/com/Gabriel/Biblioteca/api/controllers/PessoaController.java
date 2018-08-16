@@ -1,6 +1,16 @@
 package com.Gabriel.Biblioteca.api.controllers;
 
+import java.security.NoSuchAlgorithmException;
+import java.util.Optional;
+
+import javax.validation.Valid;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,18 +19,97 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.Gabriel.Biblioteca.api.dtos.PessoaDTO;
+import com.Gabriel.Biblioteca.api.entities.Pessoa;
+import com.Gabriel.Biblioteca.api.response.Response;
+import com.Gabriel.Biblioteca.api.services.PessoaService;
 
 @RestController
 @RequestMapping("/api/pessoa")
 public class PessoaController {
-	@GetMapping(value = "/{codigo}")
-	public String consulta(@PathVariable("codigo") String codigo) {
-		return "Código apresentado: " + codigo;
+
+	private static final Logger log = LoggerFactory.getLogger(AutorController.class);
+
+	@Autowired
+	PessoaService pessoaService;
+
+	/**
+	 * 
+	 * Consulta de pessoa atravez do CPF
+	 * 
+	 * @param cpf
+	 * @return
+	 */
+	@GetMapping(value = "/{cpf}")
+	public ResponseEntity<Response<PessoaDTO>> consulta(@PathVariable("cpf") String cpf) {
+
+		Response<PessoaDTO> response = new Response<>();
+		Optional<Pessoa> pessoa = pessoaService.findbyCPF(cpf);
+
+		if (!pessoa.isPresent()) {
+			log.error("Código de pessoa não cadastrado na base de dados");
+			response.getErrors().add("Código de pessoa não cadastrado na base de dados");
+			return ResponseEntity.badRequest().body(response);
+		}
+
+		PessoaDTO pessoaDTO = convertePessoaParaDTO(pessoa.get());
+		response.setData(pessoaDTO);
+
+		log.info("Consulta do usuario {}", pessoaDTO);
+		return ResponseEntity.ok(response);
 	}
 
 	@PostMapping
-	public ResponseEntity<PessoaDTO> cadastrar(@RequestBody PessoaDTO pessoaDTO) {
+	public ResponseEntity<Response<PessoaDTO>> cadastrar(@Valid @RequestBody PessoaDTO pessoaDTO, BindingResult result)
+			throws NoSuchAlgorithmException {
+		log.info("Cadastrando pessoa {}", pessoaDTO.toString());
 
-		return ResponseEntity.ok(pessoaDTO);
+		Response<PessoaDTO> response = new Response<>();
+		validaSePessoaExiste(pessoaDTO, result);
+		Pessoa pessoa = converteDTOParaPessoa(pessoaDTO);
+		
+		if (result.hasErrors()) {
+			log.error("Erro ao validar informalções: {}", result.getAllErrors());
+			result.getAllErrors().forEach(error -> response.getErrors().add(error.getDefaultMessage()));
+			return ResponseEntity.badRequest().body(response);
+		}
+		
+		this.pessoaService.persistir(pessoa);
+		response.setData(convertePessoaParaDTO(pessoaService.findbyCPF(pessoa.getCpf()).get()));
+		return ResponseEntity.ok(response);
+	}
+
+	private void validaSePessoaExiste(PessoaDTO pessoaDTO, BindingResult result) {
+		this.pessoaService.findbyCPF(pessoaDTO.getCpf())
+				.ifPresent(aut -> result.addError(new ObjectError("pessoa", pessoaDTO.getNome() + " já existe")));
+	}
+
+	/**
+	 * Converte Entity em DTO
+	 * 
+	 * @param pessoa
+	 * @return DTO
+	 */
+	private PessoaDTO convertePessoaParaDTO(Pessoa pessoa) {
+		PessoaDTO pessoaDTO = new PessoaDTO();
+		pessoaDTO.setCpf(pessoa.getCpf());
+		pessoaDTO.setNome(pessoa.getNome());
+		pessoaDTO.setTelefone(pessoa.getTelefone());
+		pessoaDTO.setId(pessoa.getId());
+		return pessoaDTO;
+	}
+
+	/**
+	 * Converte DTO em Entity
+	 * 
+	 * @param pessoaDTO
+	 * @return Entity
+	 */
+	private Pessoa converteDTOParaPessoa(PessoaDTO pessoaDTO) {
+		Pessoa pessoa = new Pessoa();
+		pessoa.setCpf(pessoaDTO.getCpf());
+		pessoa.setNome(pessoaDTO.getNome());
+		pessoa.setTelefone(pessoaDTO.getTelefone());
+		pessoa.setId(pessoaDTO.getId());
+		return pessoa;
 	}
 }
