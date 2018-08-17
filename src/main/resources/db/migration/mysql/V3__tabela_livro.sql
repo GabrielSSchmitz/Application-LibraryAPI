@@ -12,3 +12,9 @@ CREATE TABLE `Biblioteca`.`livro` (
 	`quantidadeEmprestimo` INT NOT NULL , 
 	PRIMARY KEY (`id`)
 ) ENGINE = InnoDB;
+
+ALTER TABLE `livro`
+  ADD CONSTRAINT `fk_autor` FOREIGN KEY (`autor`) REFERENCES `autor` (`id`);
+  
+ALTER TABLE `livro`
+  ADD CONSTRAINT `fk_editora` FOREIGN KEY (`editora`) REFERENCES `editora` (`id`);

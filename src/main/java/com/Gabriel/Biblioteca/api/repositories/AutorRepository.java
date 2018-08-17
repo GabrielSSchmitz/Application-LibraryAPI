@@ -18,5 +18,6 @@ public interface AutorRepository extends JpaRepository<Autor, Long> {
 
 	Autor findByCodigo(@Param("codigo") String codigo);
 
+	@Override
 	List<Autor> findAll();
 }

@@ -99,16 +99,23 @@ public class Livro implements Serializable {
 		this.volume = volume;
 	}
 
-	@Column
-	public Editora getEditora() {
+	
+	public Editora getObjEditora() {
 		return editora;
+	}
+	
+	public int getEditora() {
+		return editora.getId();
+	}
+
+	public void setEditora(int editora) {
+		this.editora.setId(editora);;
 	}
 
 	public void setEditora(Editora editora) {
 		this.editora = editora;
 	}
 
-	@Column
 	public ArrayList<Autor> getAutores() {
 		return autores;
 	}

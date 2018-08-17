@@ -21,4 +21,7 @@ public interface EditoraService {
 	 * @return Editora
 	 */
 	public Editora persistir(Editora editora);
+	
+
+	public Optional<Editora> findById(int id);
 }

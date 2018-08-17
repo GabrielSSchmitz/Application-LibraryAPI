@@ -1,6 +1,5 @@
 package com.Gabriel.Biblioteca.api.services.implement;
 
-
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -30,6 +29,11 @@ public class EditoraServiceImpl implements EditoraService {
 	public Editora persistir(Editora editora) {
 		log.info("Cadastrando autor: {}", editora);
 		return this.editoraRepository.save(editora);
+	}
+
+	@Override
+	public Optional<Editora> findById(int id) {
+		return editoraRepository.findById(id);
 	}
 
 }

@@ -3,3 +3,8 @@
 	  "nome" : "Gabriel",
  "sobrenome" : "Schmitz"
 }
+
+
+
+ALTER TABLE `agendamentos`
+  ADD CONSTRAINT `fk_cliente` FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`clientes_id`);
