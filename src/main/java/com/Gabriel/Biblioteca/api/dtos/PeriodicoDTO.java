@@ -1,5 +1,6 @@
 package com.Gabriel.Biblioteca.api.dtos;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 
 public class PeriodicoDTO {
@@ -28,7 +29,7 @@ public class PeriodicoDTO {
 		this.codigo = codigo;
 	}
 
-	@NotEmpty(message = "Tipo não deve ser vazio")
+	@Min(value = 1, message = "Tipo não deve ser vazio")
 	public int getTipo() {
 		return tipo;
 	}
@@ -54,7 +55,7 @@ public class PeriodicoDTO {
 		this.id = id;
 	}
 
-	@NotEmpty(message = "Volume não deve ser vazio")
+	@Min(value = 1, message = "Volume não deve ser vazio")
 	public int getVolume() {
 		return volume;
 	}
@@ -63,7 +64,7 @@ public class PeriodicoDTO {
 		this.volume = volume;
 	}
 
-	@NotEmpty(message = "Quantidade não deve ser vazio")
+	@Min(value = 1, message = "Quantidade não deve ser vazio")
 	public int getQuantidade() {
 		return quantidade;
 	}

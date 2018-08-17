@@ -1,5 +1,9 @@
 package com.Gabriel.Biblioteca.api.dtos;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 public class MaterialDTO {
 
 	private int id;
@@ -27,6 +31,7 @@ public class MaterialDTO {
 		this.id = id;
 	}
 
+	@NotEmpty(message = "Código não deve ser vazio")
 	public String getCodigo() {
 		return codigo;
 	}
@@ -35,6 +40,7 @@ public class MaterialDTO {
 		this.codigo = codigo;
 	}
 
+	@Min(value = 1, message = "Tipo não deve ser nulo")
 	public int getTipo() {
 		return tipo;
 	}
@@ -43,6 +49,7 @@ public class MaterialDTO {
 		this.tipo = tipo;
 	}
 
+	@NotEmpty(message = "Nome não deve ser vazio")
 	public String getNome() {
 		return nome;
 	}
@@ -51,6 +58,7 @@ public class MaterialDTO {
 		this.nome = nome;
 	}
 
+	@NotEmpty(message = "Descrição não deve ser vazio")
 	public String getDescricao() {
 		return descricao;
 	}
@@ -59,6 +67,7 @@ public class MaterialDTO {
 		this.descricao = descricao;
 	}
 
+	@NotEmpty(message = "Material não deve ser vazio")
 	public String getMaterial() {
 		return material;
 	}
@@ -67,6 +76,8 @@ public class MaterialDTO {
 		this.material = material;
 	}
 
+	@NotEmpty(message = "Estante não deve ser vazio")
+	@NotNull
 	public String getEstante() {
 		return estante;
 	}
@@ -75,6 +86,7 @@ public class MaterialDTO {
 		this.estante = estante;
 	}
 
+	@Min(value = 1, message = "Quantidade não deve ser nulo")
 	public int getQuantidade() {
 		return quantidade;
 	}

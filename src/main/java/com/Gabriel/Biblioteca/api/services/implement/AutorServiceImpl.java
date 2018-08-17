@@ -1,5 +1,6 @@
 package com.Gabriel.Biblioteca.api.services.implement;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -30,10 +31,10 @@ public class AutorServiceImpl implements AutorService {
 		return this.autorRepository.save(autor);
 	}
 
-//	@Override
-//	public List<Autor> findAll() {
-//		return  autorRepository.findAll();
-//	}
+	@Override
+	public List<Autor> findAll() {
+		return  autorRepository.findAll();
+	}
 
 
 

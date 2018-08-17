@@ -1,7 +1,9 @@
 package com.Gabriel.Biblioteca.api.controllers;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -32,14 +34,19 @@ public class AutorController {
 	@Autowired
 	private AutorService service;
 
-//	@GetMapping
-//	public ResponseEntity<Response<AutorDTO>> listaAutores() {
-//		Response<AutorDTO> response = new Response<AutorDTO>();
-//
-//		response.setData(autorService.findAll());
-//		
-//		return ResponseEntity.ok(response);
-//	}
+	@GetMapping
+	public ResponseEntity<Response<List<AutorDTO>>> listaAutores() {
+	   Response<List<AutorDTO>> response = new Response<List<AutorDTO>>();
+	 
+	   List<AutorDTO> autorDTOS = service.findAll()
+	         .stream()
+	         .map(this::converteEntityParaDTO)
+	         .collect(Collectors.toList());
+	 
+	   response.setData(autorDTOS);
+	 
+	   return ResponseEntity.ok(response);
+	}
 
 	/**
 	 * 

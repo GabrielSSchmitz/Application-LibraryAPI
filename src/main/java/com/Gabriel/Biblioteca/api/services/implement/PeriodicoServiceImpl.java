@@ -17,18 +17,18 @@ public class PeriodicoServiceImpl implements PeriodicoService {
 	private static final Logger log = LoggerFactory.getLogger(AutorServiceImpl.class);
 
 	@Autowired
-	private PeriodicoRepository periodicoRepository;
+	private PeriodicoRepository repository;
 
 	@Override
 	public Optional<Periodico> findByCodigo(String codigo) {
 		log.info("Buscando periodico pelo codigo {}", codigo);
-		return Optional.ofNullable(periodicoRepository.findByCodigo(codigo));
+		return Optional.ofNullable(repository.findByCodigo(codigo));
 	}
 
 	@Override
 	public Periodico persistir(Periodico periodico) {
 		log.info("Cadastrando periodico: {}", periodico.toString());
-		return periodicoRepository.save(periodico);
+		return repository.save(periodico);
 	}
 
 }

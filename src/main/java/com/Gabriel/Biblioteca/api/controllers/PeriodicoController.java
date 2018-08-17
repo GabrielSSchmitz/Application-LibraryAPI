@@ -43,7 +43,6 @@ public class PeriodicoController {
 	public ResponseEntity<Response<PeriodicoDTO>> consulta(@PathVariable("codigo") String codigo) {
 		Response<PeriodicoDTO> response = new Response<>();
 		Optional<Periodico> entity = service.findByCodigo(codigo);
-		entity.get().setQuantidadeEmprestimo(entity.get().getQuantidade());
 
 		// =========================================================================================================
 
@@ -55,7 +54,7 @@ public class PeriodicoController {
 
 		response.setData(converteEntityParaDTO(entity.get()));
 
-		log.info("Consulta do autor {}", response.getData());
+		log.info("Consulta do periodico {}", response.getData());
 
 		return ResponseEntity.ok(response);
 	}
