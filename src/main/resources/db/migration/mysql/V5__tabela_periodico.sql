@@ -5,6 +5,6 @@ CREATE TABLE `Biblioteca`.`periodico` (
 	 `nome` VARCHAR(255) NOT NULL , 
 	 `volume` INT NOT NULL , 
 	 `quantidade` INT NOT NULL , 
-	 `quantidadeEmprestimo` INT NOT NULL , 
+	 `quantidade_emprestimo` INT NOT NULL , 
 	 PRIMARY KEY (`id`)
 ) ENGINE = InnoDB;

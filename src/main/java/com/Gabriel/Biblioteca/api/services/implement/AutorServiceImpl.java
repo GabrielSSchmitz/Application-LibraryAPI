@@ -26,7 +26,7 @@ public class AutorServiceImpl implements AutorService {
 
 	@Override
 	public Autor persistir(Autor autor) {
-		log.info("Cadastrando autor: {}", autor);
+		log.info("Cadastrando autor: {}", autor.toString());
 		return this.autorRepository.save(autor);
 	}
 

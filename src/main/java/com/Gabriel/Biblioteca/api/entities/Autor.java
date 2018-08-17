@@ -7,6 +7,9 @@ import javax.persistence.*;
 @Table(name = "autor")
 public class Autor implements Serializable {
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 8458069119263096764L;
 
 	private int id;

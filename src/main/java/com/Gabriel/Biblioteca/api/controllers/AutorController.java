@@ -30,7 +30,7 @@ public class AutorController {
 	private static final Logger log = LoggerFactory.getLogger(AutorController.class);
 
 	@Autowired
-	private AutorService autorService;
+	private AutorService service;
 
 //	@GetMapping
 //	public ResponseEntity<Response<AutorDTO>> listaAutores() {
@@ -52,7 +52,7 @@ public class AutorController {
 	public ResponseEntity<Response<AutorDTO>> consulta(@PathVariable("codigo") String codigo) {
 
 		Response<AutorDTO> response = new Response<AutorDTO>();
-		Optional<Autor> autor = autorService.findByCodigo(codigo);
+		Optional<Autor> autor = service.findByCodigo(codigo);
 
 		if (!autor.isPresent()) {
 			log.error("Código de autor não cadastrado na base de dados");
@@ -60,7 +60,7 @@ public class AutorController {
 			return ResponseEntity.badRequest().body(response);
 		}
 
-		AutorDTO autorDTO = converteAutorParaDTO(autor.get());
+		AutorDTO autorDTO = converteEntityParaDTO(autor.get());
 
 		response.setData(autorDTO);
 
@@ -73,19 +73,19 @@ public class AutorController {
 	 * 
 	 * Cadastra novo autor na base de dados
 	 * 
-	 * @param autorDTO
+	 * @param DTO
 	 * @param result
 	 * @return Autor
 	 * @throws NoSuchAlgorithmException
 	 */
 	@PostMapping
-	public ResponseEntity<Response<AutorDTO>> cadatrar(@Valid @RequestBody AutorDTO autorDTO, BindingResult result)
+	public ResponseEntity<Response<AutorDTO>> cadatrar(@Valid @RequestBody AutorDTO DTO, BindingResult result)
 			throws NoSuchAlgorithmException {
-		log.info("Cadastrando autor {}", autorDTO.toString());
+		log.info("Cadastrando autor {}", DTO.toString());
 
 		Response<AutorDTO> response = new Response<>();
-		validaSeAutorExiste(autorDTO, result);
-		Autor autor = this.converteDTOParaAutor(autorDTO);
+		validaSeExiste(DTO, result);
+		Autor entity = this.converteDTOParaEntity(DTO);
 
 		if (result.hasErrors()) {
 			log.error("Erro ao validar informalções: {}", result.getAllErrors());
@@ -93,8 +93,8 @@ public class AutorController {
 			return ResponseEntity.badRequest().body(response);
 		}
 
-		this.autorService.persistir(autor);
-		response.setData(this.converteAutorParaDTO(autor));
+		this.service.persistir(entity);
+		response.setData(this.converteEntityParaDTO(entity));
 		return ResponseEntity.ok(response);
 	}
 
@@ -105,7 +105,7 @@ public class AutorController {
 	 * @param autorDTO
 	 * @return Entity
 	 */
-	private Autor converteDTOParaAutor(AutorDTO autorDTO) {
+	private Autor converteDTOParaEntity(AutorDTO autorDTO) {
 		Autor autor = new Autor();
 		autor.setCodigo(autorDTO.getCodigo());
 		autor.setNome(autorDTO.getNome());
@@ -120,7 +120,7 @@ public class AutorController {
 	 * @param autor
 	 * @return DTO
 	 */
-	private AutorDTO converteAutorParaDTO(Autor autor) {
+	private AutorDTO converteEntityParaDTO(Autor autor) {
 		AutorDTO autorDTO = new AutorDTO();
 		autorDTO.setCodigo(autor.getCodigo());
 		autorDTO.setNome(autor.getNome());
@@ -133,12 +133,12 @@ public class AutorController {
 	 * 
 	 * Valida se o Autor ja existe na base de dados
 	 * 
-	 * @param autorDTO
+	 * @param DTO
 	 * @param result
 	 */
-	private void validaSeAutorExiste(AutorDTO autorDTO, BindingResult result) {
-		this.autorService.findByCodigo(autorDTO.getCodigo())
-				.ifPresent(aut -> result.addError(new ObjectError("autor", autorDTO.getNome() + " já existe")));
+	private void validaSeExiste(AutorDTO dTO, BindingResult result) {
+		this.service.findByCodigo(dTO.getCodigo())
+				.ifPresent(aut -> result.addError(new ObjectError("autor", dTO.getNome() + " já existe")));
 
 	}
 //

@@ -85,7 +85,7 @@ public class Periodico implements Serializable {
 		this.quantidade = quantidade;
 	}
 
-	@Column
+	@Column(name="quantidadeEmprestimo")
 	public int getQuantidadeEmprestimo() {
 		return quantidadeEmprestimo;
 	}

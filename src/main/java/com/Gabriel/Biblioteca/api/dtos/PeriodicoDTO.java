@@ -1,5 +1,7 @@
 package com.Gabriel.Biblioteca.api.dtos;
 
+import javax.validation.constraints.NotEmpty;
+
 public class PeriodicoDTO {
 
 	private String codigo;
@@ -17,6 +19,7 @@ public class PeriodicoDTO {
 		// TODO Auto-generated constructor stub
 	}
 
+	@NotEmpty(message = "Código não deve ser vazio")
 	public String getCodigo() {
 		return codigo;
 	}
@@ -25,6 +28,7 @@ public class PeriodicoDTO {
 		this.codigo = codigo;
 	}
 
+	@NotEmpty(message = "Tipo não deve ser vazio")
 	public int getTipo() {
 		return tipo;
 	}
@@ -33,6 +37,7 @@ public class PeriodicoDTO {
 		this.tipo = tipo;
 	}
 
+	@NotEmpty(message = "Nome não deve ser vazio")
 	public String getNome() {
 		return nome;
 	}
@@ -49,6 +54,7 @@ public class PeriodicoDTO {
 		this.id = id;
 	}
 
+	@NotEmpty(message = "Volume não deve ser vazio")
 	public int getVolume() {
 		return volume;
 	}
@@ -57,6 +63,7 @@ public class PeriodicoDTO {
 		this.volume = volume;
 	}
 
+	@NotEmpty(message = "Quantidade não deve ser vazio")
 	public int getQuantidade() {
 		return quantidade;
 	}
