@@ -2,7 +2,6 @@ package com.Gabriel.Biblioteca.api.dtos;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 public class MaterialDTO {
 
@@ -77,7 +76,6 @@ public class MaterialDTO {
 	}
 
 	@NotEmpty(message = "Estante não deve ser vazio")
-	@NotNull
 	public String getEstante() {
 		return estante;
 	}

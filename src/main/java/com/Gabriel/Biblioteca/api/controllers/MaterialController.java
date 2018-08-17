@@ -96,18 +96,18 @@ public class MaterialController {
 	 * @param periodicoDTO
 	 * @return
 	 */
-	private Material converteDTOParaEntity(@Valid MaterialDTO convertFor) {
+	private Material converteDTOParaEntity( MaterialDTO convertFor) {
 		Material convert = new Material();
 
 		convert.setCodigo(convertFor.getCodigo());
-		convert.setDescricao(convert.getDescricao());
-		convert.setEstante(convert.getEstante());
-		convert.setId(convert.getId());
-		convert.setMaterial(convert.getMaterial());
-		convert.setNome(convert.getNome());
-		convert.setQuantidade(convert.getQuantidade());
-		convert.setQuantidadeEmprestimo(convert.getQuantidadeEmprestimo());
-		convert.setTipo(convert.getTipo());
+		convert.setDescricao(convertFor.getDescricao());
+		convert.setEstante(convertFor.getEstante());
+		convert.setId(convertFor.getId());
+		convert.setMaterial(convertFor.getMaterial());
+		convert.setNome(convertFor.getNome());
+		convert.setQuantidade(convertFor.getQuantidade());
+		convert.setQuantidadeEmprestimo(convertFor.getQuantidadeEmprestimo());
+		convert.setTipo(convertFor.getTipo());
 
 		return convert;
 	}
@@ -122,14 +122,14 @@ public class MaterialController {
 		MaterialDTO convert = new MaterialDTO();
 
 		convert.setCodigo(convertFor.getCodigo());
-		convert.setDescricao(convert.getDescricao());
-		convert.setEstante(convert.getEstante());
-		convert.setId(convert.getId());
-		convert.setMaterial(convert.getMaterial());
-		convert.setNome(convert.getNome());
-		convert.setQuantidade(convert.getQuantidade());
-		convert.setQuantidadeEmprestimo(convert.getQuantidadeEmprestimo());
-		convert.setTipo(convert.getTipo());
+		convert.setDescricao(convertFor.getDescricao());
+		convert.setEstante(convertFor.getEstante());
+		convert.setId(convertFor.getId());
+		convert.setMaterial(convertFor.getMaterial());
+		convert.setNome(convertFor.getNome());
+		convert.setQuantidade(convertFor.getQuantidade());
+		convert.setQuantidadeEmprestimo(convertFor.getQuantidadeEmprestimo());
+		convert.setTipo(convertFor.getTipo());
 
 		return convert;
 	}
