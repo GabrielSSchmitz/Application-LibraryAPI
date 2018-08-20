@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.Gabriel.Biblioteca.api.dtos.MaterialDTO;
 import com.Gabriel.Biblioteca.api.dtos.PeriodicoDTO;
 import com.Gabriel.Biblioteca.api.entities.Periodico;
 import com.Gabriel.Biblioteca.api.response.Response;

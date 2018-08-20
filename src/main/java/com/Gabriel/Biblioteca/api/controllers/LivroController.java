@@ -20,11 +20,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.Gabriel.Biblioteca.api.dtos.EditoraDTO;
 import com.Gabriel.Biblioteca.api.dtos.LivroDTO;
-import com.Gabriel.Biblioteca.api.dtos.PeriodicoDTO;
 import com.Gabriel.Biblioteca.api.entities.Livro;
-import com.Gabriel.Biblioteca.api.entities.Periodico;
 import com.Gabriel.Biblioteca.api.response.Response;
 import com.Gabriel.Biblioteca.api.services.LivroService;
 
@@ -32,11 +29,17 @@ import com.Gabriel.Biblioteca.api.services.LivroService;
 @RequestMapping("/api/livro")
 public class LivroController {
 
-	private static final Logger log = LoggerFactory.getLogger(AutorController.class);
+	private static final Logger log = LoggerFactory.getLogger(LivroController.class);
 
 	@Autowired
 	LivroService service;
 
+	/**
+	 * 
+	 * Consulta todos os livro
+	 * 
+	 * @return List<LivroDTO>
+	 */
 	@GetMapping
 	public ResponseEntity<Response<List<LivroDTO>>> listaTodos() {
 		Response<List<LivroDTO>> response = new Response<List<LivroDTO>>();
@@ -108,17 +111,11 @@ public class LivroController {
 
 	/**
 	 * 
-	 * Valida se a entidade existe no bando de dados
+	 * Converte DTO para Entity
 	 * 
-	 * @param dTO
-	 * @param result
+	 * @param autorDTO
+	 * @return Entity
 	 */
-	private void validaSeExiste(@Valid LivroDTO dTO, BindingResult result) {
-		this.service.findByCodigo(dTO.getCodigo())
-				.ifPresent(aut -> result.addError(new ObjectError("livro", dTO.getNome() + " já existe")));
-
-	}
-
 	public Livro converteDTOParaEntity(LivroDTO convertFor) {
 		Livro convert = new Livro();
 
@@ -135,6 +132,13 @@ public class LivroController {
 		return convert;
 	}
 
+	/**
+	 * 
+	 * Converte Entity em DTO
+	 * 
+	 * @param autor
+	 * @return DTO
+	 */
 	public LivroDTO converteEntityParaDTO(Livro convertFor) {
 		LivroDTO convert = new LivroDTO();
 
@@ -151,4 +155,16 @@ public class LivroController {
 		return convert;
 	}
 
+	/**
+	 * 
+	 * Valida se a entidade existe no bando de dados
+	 * 
+	 * @param dTO
+	 * @param result
+	 */
+	private void validaSeExiste(@Valid LivroDTO dTO, BindingResult result) {
+		this.service.findByCodigo(dTO.getCodigo())
+				.ifPresent(aut -> result.addError(new ObjectError("livro", dTO.getNome() + " já existe")));
+
+	}
 }

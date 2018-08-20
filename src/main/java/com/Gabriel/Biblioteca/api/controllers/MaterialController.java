@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.Gabriel.Biblioteca.api.dtos.LivroDTO;
 import com.Gabriel.Biblioteca.api.dtos.MaterialDTO;
 import com.Gabriel.Biblioteca.api.entities.Material;
 import com.Gabriel.Biblioteca.api.response.Response;
@@ -30,11 +29,17 @@ import com.Gabriel.Biblioteca.api.services.MaterialService;
 @RequestMapping("/api/material")
 public class MaterialController {
 
-	private static final Logger log = LoggerFactory.getLogger(AutorController.class);
+	private static final Logger log = LoggerFactory.getLogger(MaterialController.class);
 
 	@Autowired
 	private MaterialService service;
 
+	/**
+	 * 
+	 * Consulta todos os materias
+	 * 
+	 * @return List<MaterialDTO>
+	 */
 	@GetMapping
 	public ResponseEntity<Response<List<MaterialDTO>>> listaTodos() {
 		Response<List<MaterialDTO>> response = new Response<List<MaterialDTO>>();
@@ -47,12 +52,17 @@ public class MaterialController {
 		return ResponseEntity.ok(response);
 	}
 
+	/**
+	 * 
+	 * Consulta de Material atravez do código
+	 * 
+	 * @param codigo
+	 * @return Material ResponseEntity.ok
+	 */
 	@GetMapping(value = "/{codigo}")
 	public ResponseEntity<Response<MaterialDTO>> consulta(@PathVariable("codigo") String codigo) {
 		Response<MaterialDTO> response = new Response<>();
 		Optional<Material> entity = service.findByCodigo(codigo);
-
-		// =========================================================================================================
 
 		if (!entity.isPresent()) {
 			log.error("Código de material não cadastrado na base de dados");
@@ -73,8 +83,6 @@ public class MaterialController {
 		log.info("Cadastrando material {}", DTO.toString());
 
 		Response<MaterialDTO> response = new Response<>();
-
-		// =========================================================================================================
 
 		validaSeExiste(DTO, result);
 		Material entity = this.converteDTOParaEntity(DTO);

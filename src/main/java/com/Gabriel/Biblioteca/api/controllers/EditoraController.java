@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.Gabriel.Biblioteca.api.dtos.AutorDTO;
 import com.Gabriel.Biblioteca.api.dtos.EditoraDTO;
 import com.Gabriel.Biblioteca.api.entities.Editora;
 import com.Gabriel.Biblioteca.api.response.Response;
@@ -30,23 +29,27 @@ import com.Gabriel.Biblioteca.api.services.EditoraService;
 @RequestMapping("/api/editora")
 public class EditoraController {
 
-	private static final Logger log = LoggerFactory.getLogger(AutorController.class);
+	private static final Logger log = LoggerFactory.getLogger(EditoraController.class);
 
 	@Autowired
 	EditoraService service;
 
+	/**
+	 * 
+	 * Consulta todos os editora
+	 * 
+	 * @return List<EditoraDTO>
+	 */
 	@GetMapping
 	public ResponseEntity<Response<List<EditoraDTO>>> listaTodos() {
-		   Response<List<EditoraDTO>> response = new Response<List<EditoraDTO>>();
-			 
-		   List<EditoraDTO> autorDTOS = service.findAll()
-		         .stream()
-		         .map(this::converteEntityParaDTO)
-		         .collect(Collectors.toList());
-		 
-		   response.setData(autorDTOS);
-		 
-		   return ResponseEntity.ok(response);
+		Response<List<EditoraDTO>> response = new Response<List<EditoraDTO>>();
+
+		List<EditoraDTO> autorDTOS = service.findAll().stream().map(this::converteEntityParaDTO)
+				.collect(Collectors.toList());
+
+		response.setData(autorDTOS);
+
+		return ResponseEntity.ok(response);
 	}
 
 	/**

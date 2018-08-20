@@ -34,18 +34,22 @@ public class AutorController {
 	@Autowired
 	private AutorService service;
 
+	/**
+	 * 
+	 * Consulta todos os autores
+	 * 
+	 * @return List<AutorDTO>
+	 */
 	@GetMapping
 	public ResponseEntity<Response<List<AutorDTO>>> listaTodos() {
-	   Response<List<AutorDTO>> response = new Response<List<AutorDTO>>();
-	 
-	   List<AutorDTO> autorDTOS = service.findAll()
-	         .stream()
-	         .map(this::converteEntityParaDTO)
-	         .collect(Collectors.toList());
-	 
-	   response.setData(autorDTOS);
-	 
-	   return ResponseEntity.ok(response);
+		Response<List<AutorDTO>> response = new Response<List<AutorDTO>>();
+
+		List<AutorDTO> autorDTOS = service.findAll().stream().map(this::converteEntityParaDTO)
+				.collect(Collectors.toList());
+
+		response.setData(autorDTOS);
+
+		return ResponseEntity.ok(response);
 	}
 
 	/**
@@ -148,12 +152,4 @@ public class AutorController {
 				.ifPresent(aut -> result.addError(new ObjectError("autor", dTO.getNome() + " já existe")));
 
 	}
-//
-//	private List<AutorDTO> converteListaParaListaDTO(List<Autor> autors) {
-//		List<AutorDTO> autorDTO = new ArrayList<>();
-//
-//		autors.forEach(autor -> autorDTO.add(converteAutorParaDTO(autor)));
-//		return autorDTO;
-//
-//	}
 }
