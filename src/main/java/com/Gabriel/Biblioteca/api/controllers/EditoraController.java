@@ -1,7 +1,9 @@
 package com.Gabriel.Biblioteca.api.controllers;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.Gabriel.Biblioteca.api.dtos.AutorDTO;
 import com.Gabriel.Biblioteca.api.dtos.EditoraDTO;
 import com.Gabriel.Biblioteca.api.entities.Editora;
 import com.Gabriel.Biblioteca.api.response.Response;
@@ -30,7 +33,21 @@ public class EditoraController {
 	private static final Logger log = LoggerFactory.getLogger(AutorController.class);
 
 	@Autowired
-	EditoraService editoraService;
+	EditoraService service;
+
+	@GetMapping
+	public ResponseEntity<Response<List<EditoraDTO>>> listaTodos() {
+		   Response<List<EditoraDTO>> response = new Response<List<EditoraDTO>>();
+			 
+		   List<EditoraDTO> autorDTOS = service.findAll()
+		         .stream()
+		         .map(this::converteEntityParaDTO)
+		         .collect(Collectors.toList());
+		 
+		   response.setData(autorDTOS);
+		 
+		   return ResponseEntity.ok(response);
+	}
 
 	/**
 	 * 
@@ -42,7 +59,7 @@ public class EditoraController {
 	@GetMapping(value = "/{codigo}")
 	public ResponseEntity<Response<EditoraDTO>> consulta(@PathVariable("codigo") String codigo) {
 		Response<EditoraDTO> response = new Response<EditoraDTO>();
-		Optional<Editora> editora = editoraService.findByCodigo(codigo);
+		Optional<Editora> editora = service.findByCodigo(codigo);
 
 		if (!editora.isPresent()) {
 			log.error("Código de autor não cadastrado na base de dados");
@@ -50,7 +67,7 @@ public class EditoraController {
 			return ResponseEntity.badRequest().body(response);
 		}
 
-		EditoraDTO editoraDTO = converteEditoraParaDTO(editora.get());
+		EditoraDTO editoraDTO = converteEntityParaDTO(editora.get());
 
 		response.setData(editoraDTO);
 
@@ -75,7 +92,7 @@ public class EditoraController {
 
 		Response<EditoraDTO> response = new Response<>();
 		validaSeEditoraExiste(editoraDTO, result);
-		Editora editora = converteDTOParaEditora(editoraDTO);
+		Editora editora = converteDTOParaEntity(editoraDTO);
 
 		if (result.hasErrors()) {
 			log.error("Erro ao validar informalções: {}", result.getAllErrors());
@@ -83,7 +100,7 @@ public class EditoraController {
 			return ResponseEntity.badRequest().body(response);
 		}
 
-		this.editoraService.persistir(editora);
+		this.service.persistir(editora);
 		response.setData(editoraDTO);
 		return ResponseEntity.ok(response);
 	}
@@ -95,7 +112,7 @@ public class EditoraController {
 	 * @param editora
 	 * @return DTO
 	 */
-	private EditoraDTO converteEditoraParaDTO(Editora editora) {
+	private EditoraDTO converteEntityParaDTO(Editora editora) {
 		EditoraDTO editoraDTO = new EditoraDTO();
 		editoraDTO.setCodigo(editora.getCodigo());
 		editoraDTO.setNome(editora.getNome());
@@ -111,7 +128,7 @@ public class EditoraController {
 	 * @param DTO
 	 * @return editora
 	 */
-	private Editora converteDTOParaEditora(EditoraDTO editoraDTO) {
+	private Editora converteDTOParaEntity(EditoraDTO editoraDTO) {
 		Editora editora = new Editora();
 		editora.setCodigo(editoraDTO.getCodigo());
 		editora.setNome(editoraDTO.getNome());
@@ -128,7 +145,7 @@ public class EditoraController {
 	 * @param result
 	 */
 	private void validaSeEditoraExiste(EditoraDTO editoraDTO, BindingResult result) {
-		this.editoraService.findByCodigo(editoraDTO.getCodigo())
+		this.service.findByCodigo(editoraDTO.getCodigo())
 				.ifPresent(aut -> result.addError(new ObjectError("Editora", editoraDTO.getNome() + " já existe")));
 
 	}

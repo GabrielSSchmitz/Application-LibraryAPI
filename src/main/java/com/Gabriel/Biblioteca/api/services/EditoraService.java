@@ -1,5 +1,6 @@
 package com.Gabriel.Biblioteca.api.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.Gabriel.Biblioteca.api.entities.Editora;
@@ -12,7 +13,7 @@ public interface EditoraService {
 	 * @param codigo
 	 * @return Optional<Editora>
 	 */
-	public Optional<Editora> findByCodigo(String codigo);
+	Optional<Editora> findByCodigo(String codigo);
 
 	/**
 	 * Salva a editora na base de dados
@@ -20,8 +21,9 @@ public interface EditoraService {
 	 * @param editora
 	 * @return Editora
 	 */
-	public Editora persistir(Editora editora);
-	
+	Editora persistir(Editora editora);
 
-	public Optional<Editora> findById(int id);
+	Optional<Editora> findById(int id);
+
+	List<Editora> findAll();
 }

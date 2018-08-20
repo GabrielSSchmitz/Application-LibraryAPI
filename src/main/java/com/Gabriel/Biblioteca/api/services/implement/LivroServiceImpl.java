@@ -1,5 +1,6 @@
 package com.Gabriel.Biblioteca.api.services.implement;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -27,8 +28,14 @@ public class LivroServiceImpl implements LivroService {
 
 	@Override
 	public Livro persistir(Livro livro) {
-		log.info("Cadastrando livro: {}", livro.toString());
+		log.info("Cadastrando livro: {}", livro);
 		return repository.save(livro);
+	}
+
+	@Override
+	public List<Livro> findAll() {
+		log.info("Procurando todos os livros");
+		return repository.findAll();
 	}
 
 }

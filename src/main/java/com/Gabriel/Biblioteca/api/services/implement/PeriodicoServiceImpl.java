@@ -1,5 +1,6 @@
 package com.Gabriel.Biblioteca.api.services.implement;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -29,6 +30,12 @@ public class PeriodicoServiceImpl implements PeriodicoService {
 	public Periodico persistir(Periodico periodico) {
 		log.info("Cadastrando periodico: {}", periodico.toString());
 		return repository.save(periodico);
+	}
+
+	@Override
+	public List<Periodico> findAll() {
+		log.info("Procurando todos os periodicos");
+		return repository.findAll();
 	}
 
 }

@@ -17,23 +17,23 @@ public class AutorServiceImpl implements AutorService {
 	private static final Logger log = LoggerFactory.getLogger(AutorServiceImpl.class);
 
 	@Autowired
-	private AutorRepository autorRepository;
+	private AutorRepository repository;
 
 	@Override
 	public Optional<Autor> findByCodigo(String codigo) {
 		log.info("Buscando Autor pelo codigo {}", codigo);
-		return Optional.ofNullable(autorRepository.findByCodigo(codigo));
+		return Optional.ofNullable(repository.findByCodigo(codigo));
 	}
 
 	@Override
 	public Autor persistir(Autor autor) {
 		log.info("Cadastrando autor: {}", autor.toString());
-		return this.autorRepository.save(autor);
+		return this.repository.save(autor);
 	}
 
 	@Override
 	public List<Autor> findAll() {
-		return  autorRepository.findAll();
+		return  repository.findAll();
 	}
 
 

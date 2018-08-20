@@ -1,5 +1,6 @@
 package com.Gabriel.Biblioteca.api.services.implement;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -29,6 +30,12 @@ public class MaterialServiceImpl implements MaterialService {
 	public Material persistir(Material material) {
 		log.info("Cadastrando material: {}", material.toString());
 		return repository.save(material);
+	}
+
+	@Override
+	public List<Material> findAll() {
+		log.info("Procurando todos os materiais");
+		return repository.findAll();
 	}
 
 }

@@ -6,15 +6,9 @@ CREATE TABLE `Biblioteca`.`livro` (
 	`data` VARCHAR(255) NOT NULL , 
 	`edicao` INT NOT NULL , 
 	`volume` INT NOT NULL , 
-	`editora` INT NOT NULL , 
-	`autor` INT NOT NULL , 
+	`id_editora` INT NOT NULL , 
+	`id_autor` INT NOT NULL , 
 	`quantidade` INT NOT NULL , 
-	`quantidadeEmprestimo` INT NOT NULL , 
+	`quantidade_emprestimo` INT NOT NULL , 
 	PRIMARY KEY (`id`)
 ) ENGINE = InnoDB;
-
-ALTER TABLE `livro`
-  ADD CONSTRAINT `fk_autor` FOREIGN KEY (`autor`) REFERENCES `autor` (`id`);
-  
-ALTER TABLE `livro`
-  ADD CONSTRAINT `fk_editora` FOREIGN KEY (`editora`) REFERENCES `editora` (`id`);

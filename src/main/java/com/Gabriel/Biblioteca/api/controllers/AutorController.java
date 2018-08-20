@@ -35,7 +35,7 @@ public class AutorController {
 	private AutorService service;
 
 	@GetMapping
-	public ResponseEntity<Response<List<AutorDTO>>> listaAutores() {
+	public ResponseEntity<Response<List<AutorDTO>>> listaTodos() {
 	   Response<List<AutorDTO>> response = new Response<List<AutorDTO>>();
 	 
 	   List<AutorDTO> autorDTOS = service.findAll()

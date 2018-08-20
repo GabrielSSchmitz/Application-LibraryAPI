@@ -1,7 +1,6 @@
 package com.Gabriel.Biblioteca.api.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.Gabriel.Biblioteca.api.dtos.LivroDTO;
+
+//import com.Gabriel.Biblioteca.api.dtos.LivroDTO;
+
 @Entity
 @Table(name = "livro")
 public class Livro implements Serializable {
@@ -17,7 +20,7 @@ public class Livro implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -8547138235051226607L;
+	private static final long serialVersionUID = -3818399695794545918L;
 
 	private int id;
 	private String codigo;
@@ -26,14 +29,12 @@ public class Livro implements Serializable {
 	private String data;
 	private int edicao;
 	private int volume;
-	private Editora editora;
-	private ArrayList<Autor> autores;
+	private int id_editora;
+	private int id_autor;
 	private int quantidade;
 	private int quantidadeEmprestimo;
 
-	public Livro() {
-		// TODO Auto-generated constructor stub
-	}
+	// Definições dos metodos get
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -41,112 +42,101 @@ public class Livro implements Serializable {
 		return id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	@Column
+	@Column(name = "codigo")
 	public String getCodigo() {
 		return codigo;
+	}
+
+	@Column(name = "tipo")
+	public int getTipo() {
+		return tipo;
+	}
+
+	@Column(name = "nome")
+	public String getNome() {
+		return nome;
+	}
+
+	@Column(name = "data")
+	public String getData() {
+		return data;
+	}
+
+	@Column(name = "edicao")
+	public int getEdicao() {
+		return edicao;
+	}
+
+	@Column(name = "volume")
+	public int getVolume() {
+		return volume;
+	}
+
+	@Column(name = "quantidade")
+	public int getQuantidade() {
+		return quantidade;
+	}
+
+	@Column(name = "quantidade_emprestimo")
+	public int getQuantidadeEmprestimo() {
+		return quantidadeEmprestimo;
+	}
+
+	@Column(name = "id_editora")
+	public int getId_editora() {
+		return id_editora;
+	}
+
+	@Column(name = "id_autor")
+	public int getId_autor() {
+		return id_autor;
+	}
+	// Definições dos metodos Set
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
 
-	@Column
-	public int getTipo() {
-		return tipo;
-	}
-
 	public void setTipo(int tipo) {
 		this.tipo = tipo;
-	}
-
-	@Column
-	public String getNome() {
-		return nome;
 	}
 
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
-	@Column
-	public String getData() {
-		return data;
-	}
-
 	public void setData(String data) {
 		this.data = data;
-	}
-
-	@Column
-	public int getEdicao() {
-		return edicao;
 	}
 
 	public void setEdicao(int edicao) {
 		this.edicao = edicao;
 	}
 
-	@Column
-	public int getVolume() {
-		return volume;
-	}
-
 	public void setVolume(int volume) {
 		this.volume = volume;
-	}
-
-	
-	public Editora getObjEditora() {
-		return editora;
-	}
-	
-	public int getEditora() {
-		return editora.getId();
-	}
-
-	public void setEditora(int editora) {
-		this.editora.setId(editora);;
-	}
-
-	public void setEditora(Editora editora) {
-		this.editora = editora;
-	}
-
-	public ArrayList<Autor> getAutores() {
-		return autores;
-	}
-
-	public void setAutores(ArrayList<Autor> autores) {
-		this.autores = autores;
-	}
-
-	@Column
-	public int getQuantidade() {
-		return quantidade;
 	}
 
 	public void setQuantidade(int quantidade) {
 		this.quantidade = quantidade;
 	}
 
-	@Column
-	public int getQuantidadeEmprestimo() {
-		return quantidadeEmprestimo;
-	}
-
 	public void setQuantidadeEmprestimo(int quantidadeEmprestimo) {
 		this.quantidadeEmprestimo = quantidadeEmprestimo;
 	}
 
-	@Override
-	public String toString() {
-		return "Livro [id=" + id + ", codigo=" + codigo + ", tipo=" + tipo + ", nome=" + nome + ", data=" + data
-				+ ", edicao=" + edicao + ", volume=" + volume + ", editora=" + editora + ", autores=" + autores
-				+ ", quantidade=" + quantidade + ", quantidadeEmprestimo=" + quantidadeEmprestimo + "]";
+	public void setId_editora(int id_editora) {
+		this.id_editora = id_editora;
 	}
+
+	public void setId_autor(int id_autor) {
+		this.id_autor = id_autor;
+	}
+
+	// ===============================================================================
 
 }

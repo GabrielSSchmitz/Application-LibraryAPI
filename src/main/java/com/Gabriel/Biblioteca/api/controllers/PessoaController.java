@@ -1,7 +1,9 @@
 package com.Gabriel.Biblioteca.api.controllers;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -30,7 +32,19 @@ public class PessoaController {
 	private static final Logger log = LoggerFactory.getLogger(AutorController.class);
 
 	@Autowired
-	PessoaService pessoaService;
+	PessoaService service;
+
+	@GetMapping
+	public ResponseEntity<Response<List<PessoaDTO>>> listaTodos() {
+		Response<List<PessoaDTO>> response = new Response<List<PessoaDTO>>();
+
+		List<PessoaDTO> autorDTOS = service.findAll().stream().map(this::converteEntityParaDTO)
+				.collect(Collectors.toList());
+
+		response.setData(autorDTOS);
+
+		return ResponseEntity.ok(response);
+	}
 
 	/**
 	 * 
@@ -43,7 +57,7 @@ public class PessoaController {
 	public ResponseEntity<Response<PessoaDTO>> consulta(@PathVariable("cpf") String cpf) {
 
 		Response<PessoaDTO> response = new Response<>();
-		Optional<Pessoa> pessoa = pessoaService.findbyCPF(cpf);
+		Optional<Pessoa> pessoa = service.findbyCPF(cpf);
 
 		if (!pessoa.isPresent()) {
 			log.error("Código de pessoa não cadastrado na base de dados");
@@ -51,7 +65,7 @@ public class PessoaController {
 			return ResponseEntity.badRequest().body(response);
 		}
 
-		PessoaDTO pessoaDTO = convertePessoaParaDTO(pessoa.get());
+		PessoaDTO pessoaDTO = converteEntityParaDTO(pessoa.get());
 		response.setData(pessoaDTO);
 
 		log.info("Consulta do usuario {}", pessoaDTO);
@@ -65,21 +79,21 @@ public class PessoaController {
 
 		Response<PessoaDTO> response = new Response<>();
 		validaSePessoaExiste(pessoaDTO, result);
-		Pessoa pessoa = converteDTOParaPessoa(pessoaDTO);
-		
+		Pessoa pessoa = converteDTOParaEntity(pessoaDTO);
+
 		if (result.hasErrors()) {
 			log.error("Erro ao validar informalções: {}", result.getAllErrors());
 			result.getAllErrors().forEach(error -> response.getErrors().add(error.getDefaultMessage()));
 			return ResponseEntity.badRequest().body(response);
 		}
-		
-		this.pessoaService.persistir(pessoa);
-		response.setData(convertePessoaParaDTO(pessoaService.findbyCPF(pessoa.getCpf()).get()));
+
+		this.service.persistir(pessoa);
+		response.setData(converteEntityParaDTO(service.findbyCPF(pessoa.getCpf()).get()));
 		return ResponseEntity.ok(response);
 	}
 
 	private void validaSePessoaExiste(PessoaDTO pessoaDTO, BindingResult result) {
-		this.pessoaService.findbyCPF(pessoaDTO.getCpf())
+		this.service.findbyCPF(pessoaDTO.getCpf())
 				.ifPresent(aut -> result.addError(new ObjectError("pessoa", pessoaDTO.getNome() + " já existe")));
 	}
 
@@ -89,7 +103,7 @@ public class PessoaController {
 	 * @param pessoa
 	 * @return DTO
 	 */
-	private PessoaDTO convertePessoaParaDTO(Pessoa pessoa) {
+	private PessoaDTO converteEntityParaDTO(Pessoa pessoa) {
 		PessoaDTO pessoaDTO = new PessoaDTO();
 		pessoaDTO.setCpf(pessoa.getCpf());
 		pessoaDTO.setNome(pessoa.getNome());
@@ -104,7 +118,7 @@ public class PessoaController {
 	 * @param pessoaDTO
 	 * @return Entity
 	 */
-	private Pessoa converteDTOParaPessoa(PessoaDTO pessoaDTO) {
+	private Pessoa converteDTOParaEntity(PessoaDTO pessoaDTO) {
 		Pessoa pessoa = new Pessoa();
 		pessoa.setCpf(pessoaDTO.getCpf());
 		pessoa.setNome(pessoaDTO.getNome());

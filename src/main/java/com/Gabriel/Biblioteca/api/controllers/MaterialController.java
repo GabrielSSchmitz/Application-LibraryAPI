@@ -1,7 +1,9 @@
 package com.Gabriel.Biblioteca.api.controllers;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.Gabriel.Biblioteca.api.dtos.LivroDTO;
 import com.Gabriel.Biblioteca.api.dtos.MaterialDTO;
 import com.Gabriel.Biblioteca.api.entities.Material;
 import com.Gabriel.Biblioteca.api.response.Response;
@@ -31,6 +34,18 @@ public class MaterialController {
 
 	@Autowired
 	private MaterialService service;
+
+	@GetMapping
+	public ResponseEntity<Response<List<MaterialDTO>>> listaTodos() {
+		Response<List<MaterialDTO>> response = new Response<List<MaterialDTO>>();
+
+		List<MaterialDTO> autorDTOS = service.findAll().stream().map(this::converteEntityParaDTO)
+				.collect(Collectors.toList());
+
+		response.setData(autorDTOS);
+
+		return ResponseEntity.ok(response);
+	}
 
 	@GetMapping(value = "/{codigo}")
 	public ResponseEntity<Response<MaterialDTO>> consulta(@PathVariable("codigo") String codigo) {
@@ -96,7 +111,7 @@ public class MaterialController {
 	 * @param periodicoDTO
 	 * @return
 	 */
-	private Material converteDTOParaEntity( MaterialDTO convertFor) {
+	private Material converteDTOParaEntity(MaterialDTO convertFor) {
 		Material convert = new Material();
 
 		convert.setCodigo(convertFor.getCodigo());

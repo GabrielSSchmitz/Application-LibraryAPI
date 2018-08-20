@@ -1,7 +1,9 @@
 package com.Gabriel.Biblioteca.api.controllers;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.Gabriel.Biblioteca.api.dtos.MaterialDTO;
 import com.Gabriel.Biblioteca.api.dtos.PeriodicoDTO;
 import com.Gabriel.Biblioteca.api.entities.Periodico;
 import com.Gabriel.Biblioteca.api.response.Response;
@@ -31,6 +34,18 @@ public class PeriodicoController {
 
 	@Autowired
 	private PeriodicoService service;
+
+	@GetMapping
+	public ResponseEntity<Response<List<PeriodicoDTO>>> listaTodos() {
+		Response<List<PeriodicoDTO>> response = new Response<List<PeriodicoDTO>>();
+
+		List<PeriodicoDTO> autorDTOS = service.findAll().stream().map(this::converteEntityParaDTO)
+				.collect(Collectors.toList());
+
+		response.setData(autorDTOS);
+
+		return ResponseEntity.ok(response);
+	}
 
 	/**
 	 * 

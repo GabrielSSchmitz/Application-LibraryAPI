@@ -1,5 +1,6 @@
 package com.Gabriel.Biblioteca.api.services.implement;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -17,18 +18,24 @@ public class PessoaServiceImpl implements PessoaService {
 	private static final Logger log = LoggerFactory.getLogger(AutorServiceImpl.class);
 
 	@Autowired
-	PessoaRepository pessoaRepository;
+	PessoaRepository repository;
 
 	@Override
 	public Optional<Pessoa> findbyCPF(String CPF) {
 		log.info("Buscando pelo CPF {}", CPF);
-		return Optional.ofNullable(this.pessoaRepository.findByCpf(CPF));
+		return Optional.ofNullable(this.repository.findByCpf(CPF));
 	}
 
 	@Override
 	public Pessoa persistir(Pessoa pessoa) {
 		log.info("Cadastrando usuario: {}", pessoa.toString());
-		return this.pessoaRepository.save(pessoa);
+		return this.repository.save(pessoa);
+	}
+
+	@Override
+	public List<Pessoa> findAll() {
+		log.info("Procurando todas as pessoas");
+		return repository.findAll();
 	}
 
 }
